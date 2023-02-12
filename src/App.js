@@ -4,6 +4,7 @@ const maxObstacleX = window.innerWidth - 75;
 const maxObstacleY = 200-50;
 
 const App = () => {
+  const [showSpaghetti, setShowSpaghetti] = useState(true);
   const [humanX, setHumanX] = useState(50);
   const [humanY, setHumanY] = useState(150);
   const [pastaX, setPastaX] = useState(
@@ -103,7 +104,7 @@ const App = () => {
   useEffect(() => {
     if (time === 0) {
       setGameOver(true);
-      alert("Time's up! Your final score is: " + score);
+      alert("Time's up! Mamma mia! You ate " + score + " bowl(s) of pasta.");
       window.location.reload();
     }
   }, [time]);
@@ -113,17 +114,30 @@ const App = () => {
         backgroundImage: "url(pastapattern.jpeg)",
         backgroundSize: "400px 200px",
         }}>
-      <h1 style={{ textAlign: "center", 
-        color: "#9D00FF",
-        fontFamily: "Arial",
-        padding: '5px',
-        // borderRadius: "2px",
-        textShadow: "rebeccapurple 0 0 10px"
-      }}>
-          PASTA EATER</h1>
-      <h3 style={{ textAlign: "center" }}>You have 20 seconds to eat!!</h3>
-      <h2 style={{ textAlign: "center" }}>Score: {score}</h2>
-      <h2 style={{ textAlign: "center" }}>Time: {time} seconds</h2>
+      <div style={{ display: "flex", flexDirection: "column", justifyContent: "center" }}>
+        <h1 style={{ textAlign: "center", 
+          color: "#9D00FF",
+          fontFamily: "Arial",
+          // borderRadius: "2px",
+          textShadow: "rebeccapurple 0 0 10px"
+        }}>
+            PASTA EATER</h1>
+        <h3 style={{ textAlign: "center" }}>You have 20 seconds to eat!!</h3>
+      </div>
+      
+      <div style={{ display: "flex", justifyContent: "space-evenly"  }}>
+          <h2 style={{ textAlign: "center" }}>Score: {score}</h2>
+        <h2 style={{ textAlign: "center" }}>Time: {time} seconds</h2>
+      </div>
+      <div style={{ display: "flex", justifyContent: "center"  }}>
+        <button style={{padding: "2px", margin: "2px", display: "inline-block", fontSize: "16px"}} 
+          onClick={() => setShowSpaghetti(true)}>Spaghetti</button>
+        <button style={{padding: "2px", margin: "2px", display: "inline-block", fontSize: "16px"}} 
+          onClick={() => setShowSpaghetti(false)}>Gluten Free Pasta</button>
+
+      </div>
+
+
       <div
         style={{
           position: "relative",
@@ -144,6 +158,8 @@ const App = () => {
             height: 50 * humanSize,
           }}
         />
+
+        {showSpaghetti ? (
         <div
           style={{
             position: "relative",
@@ -151,10 +167,24 @@ const App = () => {
             top: pastaY,
             width: 90,
             height: 90,
-            backgroundImage: "url(pasta.png)",
+            backgroundImage: "url(spaghetti.png)",
             backgroundSize: "cover",
           }}
         />
+           ) : (
+            <div
+            style={{
+              position: "relative",
+              left: pastaX,
+              top: pastaY,
+              width: 90,
+              height: 90,
+              backgroundImage: "url(pasta.png)",
+              backgroundSize: "cover",
+            }}
+          />
+          )
+        }
       </div>
     </div>
   )
