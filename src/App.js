@@ -74,7 +74,7 @@ const App = () => {
         setScore(score + 1);
       }
       if (humanSize >= 5) {
-        alert("You Win! Your head grew 5x! Your score is: " + score);
+        alert("You Win! Your head grew 5x from eating " + score + " bowls of pasta and you did it in " + (20-time) + " seconds!");
         window.location.reload();
       }
     }, 50);
